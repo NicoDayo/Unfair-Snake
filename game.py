@@ -6,6 +6,7 @@ class Snake:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption('Unfair Snake')
+        self.font = pygame.font.Font('font2.ttf', 20)
         self.win_x = 720
         self.win_y = 480
         self.black = pygame.Color(0, 0, 0)
@@ -28,8 +29,8 @@ class Snake:
         self.lives = 3
 
     def score_display(self, choice, color, font, size):
-        score_font = pygame.font.SysFont(font, size)
-        score_surface = score_font.render(f'Score: {str(self.score)}    Lives: {str(self.lives)}', True, color)
+        self.font = pygame.font.Font('font2.ttf', 20)
+        score_surface = self.font.render(f'Score: {str(self.score)}    Lives: {str(self.lives)}', True, color)
         score_rect = score_surface.get_rect()
         score_rect.bottomleft = (10, self.win_y - 10)
         self.window.blit(score_surface, score_rect)
@@ -37,8 +38,8 @@ class Snake:
     def game_end(self):
         self.lives -= 1
         if self.lives == 0:
-            font = pygame.font.SysFont('arial', 50)
-            game_over_surface = font.render(f'score total: {str(self.score)}', True, self.white)
+            self.font = pygame.font.Font('font2.ttf', 40)
+            game_over_surface = self.font.render(f'score total: {str(self.score)}', True, self.white)
             game_over_rect = game_over_surface.get_rect()
             game_over_rect.midtop = (self.win_x / 2, self.win_y / 4)
             self.window.blit(game_over_surface, game_over_rect)
