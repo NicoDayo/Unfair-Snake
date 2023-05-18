@@ -61,6 +61,7 @@ class Snake:
             self.fruit_position = [random.randrange(1, (self.win_x // 10)) * 10,
                                     random.randrange(1, (self.win_y // 10)) * 10]
             self.fruit_spawn = True
+            time.sleep(2)
 
     def run(self):
         while True:
@@ -122,6 +123,6 @@ class Snake:
                 if self.init_pos[0] == block[0] and self.init_pos[1] == block[1]:
                     self.game_end()
 
-            self.score_display(1, self.white, 'arial', 20)
+            self.score_display(1, self.white, 'font2.ttf', 20)
             pygame.display.update()
             self.fps.tick(60)
