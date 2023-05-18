@@ -11,7 +11,7 @@ class StartScreen:
         self.white = pygame.Color(255, 255, 255)
         self.window = pygame.display.set_mode((self.win_x, self.win_y))
         self.font = pygame.font.SysFont('arial', 50)
-        self.title = self.font.render('Snake Game', True, self.white)
+        self.title = self.font.render('Unfair Snake', True, self.white)
         self.title_rect = self.title.get_rect()
         self.title_rect.center = (self.win_x // 2, self.win_y // 2)
         self.start_text = self.font.render('Press SPACE to Start', True, self.white)

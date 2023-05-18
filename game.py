@@ -5,7 +5,7 @@ import time
 class Snake:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption('Snake')
+        pygame.display.set_caption('Unfair Snake')
         self.win_x = 720
         self.win_y = 480
         self.black = pygame.Color(0, 0, 0)
@@ -25,6 +25,7 @@ class Snake:
         self.direction = 'RIGHT'
         self.change_to = self.direction
         self.score = 0
+        self.lives = 3
 
     def score_display(self, choice, color, font, size):
         score_font = pygame.font.SysFont(font, size)
@@ -33,16 +34,31 @@ class Snake:
         self.window.blit(score_surface, score_rect)
 
     def game_end(self):
-        font = pygame.font.SysFont('arial', 50)
-        game_over_surface = font.render(f'score total: {str(self.score)}', True, self.white)
-        game_over_rect = game_over_surface.get_rect()
-        game_over_rect.midtop = (self.win_x / 2, self.win_y / 4)
-        self.window.blit(game_over_surface, game_over_rect)
-        pygame.display.flip()
+        self.lives -= 1
+        if self.lives == 0:
+            font = pygame.font.SysFont('arial', 50)
+            game_over_surface = font.render(f'score total: {str(self.score)}', True, self.white)
+            game_over_rect = game_over_surface.get_rect()
+            game_over_rect.midtop = (self.win_x / 2, self.win_y / 4)
+            self.window.blit(game_over_surface, game_over_rect)
+            pygame.display.flip()
 
-        time.sleep(2)
-        pygame.quit()
-        quit()
+            time.sleep(2)
+            pygame.quit()
+            quit()
+        else:
+            self.init_pos = [100, 50]
+            self.body = [
+                [100, 50],
+                [90, 50],
+                [80, 50],
+                [70, 50]
+            ]
+            self.direction = 'RIGHT'
+            self.change_to = self.direction
+            self.fruit_position = [random.randrange(1, (self.win_x // 10)) * 10,
+                                    random.randrange(1, (self.win_y // 10)) * 10]
+            self.fruit_spawn = True
 
     def run(self):
         while True:
